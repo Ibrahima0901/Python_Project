@@ -1,23 +1,27 @@
-//creaation fichier jenkins
 pipeline {
-agent any
-stages {
-stage('Recuperation de notre repository sur github') {
-steps {
-git branch: 'master', url: 'https://github.com/Ibrahima0901/Python_Project.git'
-}
-}
-stage('Install Dependencies') {
-steps {
-bat'python -m venv venv'
-}
-}
-2
-stage('Run Script') {
-steps {
-bat'.\\venv/bin\\python app.py'
-}
-}
-}
+    agent any // Exécute le pipeline sur n'importe quel agent disponible
 
+    stages {
+        // Étape 1 : Récupération du dépôt GitHub
+        stage('Récupération du dépôt GitHub') {
+            steps {
+                git branch: 'master', url: 'https://github.com/Ibrahima0901/Python_Project.git'
+            }
+        }
+
+        // Étape 2 : Installation des dépendances
+        stage('Installation des dépendances') {
+            steps {
+                bat 'python -m venv venv' // Crée un environnement virtuel Python
+                bat 'venv\\Scripts\\pip install -r requirements.txt' // Installe les dépendances (si vous avez un fichier requirements.txt)
+            }
+        }
+
+        // Étape 3 : Exécution du script Python
+        stage('Exécution du script') {
+            steps {
+                bat 'venv\\Scripts\\python app.py' // Exécute le script Python avec l'environnement virtuel
+            }
+        }
+    }
 }
