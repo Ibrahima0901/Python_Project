@@ -4,7 +4,7 @@ agent any
 stages {
 stage('Recuperation de notre repository sur github') {
 steps {
-git branch: 'main', url: 'https://github.com/Ibrahima0901/Python_Project.git'
+git branch: 'master', url: 'https://github.com/Ibrahima0901/Python_Project.git'
 }
 }
 stage('Install Dependencies') {
